@@ -1,0 +1,77 @@
+body {
+  font-family: "Inter", sans-serif;
+  background-color: #f8f9fa;
+}
+
+.hero-section {
+  background: url(../Assets/images-jpeg-etc/4.jpg) no-repeat center center/cover;
+  height: 100vh;
+  color: white;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.55);
+}
+
+.hero-content {
+  z-index: 10;
+  max-width: 800px;
+}
+
+.btn-primary-custom {
+  background-color: #4c7c34;
+  border-color: #4c7c34;
+  transition: background-color 0.3s ease;
+  font-weight: 600;
+  padding: 12px 30px;
+  border-radius: 8px;
+  color: white;
+}
+
+.btn-primary-custom:hover {
+  background-color: white;
+  border-color: #386125;
+  color: #386125;
+}
+
+.btn-outline-white-custom {
+  color: white;
+  border-color: white;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  font-weight: 600;
+  padding: 12px 30px;
+  border-radius: 8px;
+}
+
+.btn-outline-white-custom:hover {
+  background-color: white;
+  color: #4c7c34;
+}
+
+.feature-icon {
+  font-size: 3rem;
+  color: #4c7c34;
+  margin-bottom: 1rem;
+}
+
+.feature-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}

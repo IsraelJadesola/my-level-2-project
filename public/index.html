@@ -4,85 +4,135 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Share Food</title>
-  <link rel="stylesheet" href="bootstrap.css">
+  <title>Eazy Food Share (EFS) Platform</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    xintegrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="./styles/index.css">
 </head>
 
 <body>
-  <div class="card mx-auto col-sm-10 col-md-6 p-4 mt-5">
-    <h1 class="text-center">Share Your Excess</h1>
-    <input type="text" placeholder="input your name here" class="form-control mb-3" id="donorName">
-    <input type="email" placeholder="input your email here" class="form-control mb-3" id="donorMail">
-    <input type="password" placeholder="input your password here" class="form-control mb-3" id="donorPassword">
-    <input type="tel" placeholder="input your phone number here" class="form-control mb-3" id="donorPhoneNumber">
-    <input type="text" placeholder="input your location here e.g (ogbomosho)" class="form-control mb-3"
-      id="donorAddress">
+  <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+    <div class="container-fluid py-2 px-4">
+      <a class="navbar-brand fw-bold fs-4 text-dark" href="index.html">
+        Eazy<span style="color: #4c7c34;">Food</span>Share
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item me-lg-3">
+            <a class="nav-link" href="#mission">Our Mission</a>
+          </li>
+          <li class="nav-item me-lg-3">
+            <a class="nav-link" href="#how-it-works">How It Works</a>
+          </li>
+          <li class="nav-item me-lg-3">
+            <a class="nav-link" href="about.html">About us</a>
+          </li>
+          <li class="nav-item">
+            <a class="btn btn-outline-success rounded-pill px-4" href="sign-up-hub.html">Sign Up</a>
+          </li>
+          <li class="nav-item">
+            <a class="btn btn-outline-dark rounded-pill px-4 ms-3" href="sign-in-hub.html">Sign In</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
 
-    <button class="btn btn-success" onclick="donateMe()" id="donate">Register as a Donator</button>
+  <header class="hero-section">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h1 class="display-3 fw-bolder mb-4 animate__animated animate__fadeInDown">
+        Bridging the Gap: Share Surplus, End Hunger.
+      </h1>
+      <p class="lead mb-5 fs-5">
+        Connect directly with neighbors and organizations to ensure delicious, extra food finds a home instead of the
+        landfill.
+      </p>
+      <div class="d-grid gap-3 d-sm-flex justify-content-sm-center">
+        <a class="btn btn-primary-custom btn-lg shadow" href="sign-up-hub.html">
+          Get Started
+        </a>
+        <a class="btn btn-outline-white-custom btn-lg shadow" href="sign-in-hub.html">
+          Login
+        </a>
+      </div>
+    </div>
+  </header>
 
-  </div>
+  <section class="py-5" id="how-it-works">
+    <div class="container py-5">
+      <h2 class="text-center display-5 fw-bold mb-3" style="color: #1e293b;">Simple Steps to Impact</h2>
+      <p class="text-center lead mb-5 text-muted">A fast, reliable process connecting food supply to community need.</p>
+      <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div class="col">
+          <div class="card h-100 feature-card text-center p-4">
+            <div class="card-body">
+              <img src="https://placehold.co/60x60/4c7c34/white?text=1" alt="Step 1 Icon"
+                class="feature-icon rounded-circle p-2 mb-3">
+              <h5 class="card-title fw-bold">1. Post Your Surplus</h5>
+              <p class="card-text text-muted">Donors quickly list items, quantities, and pickup details.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card h-100 feature-card text-center p-4">
+            <div class="card-body">
+              <img src="https://placehold.co/60x60/4c7c34/white?text=2" alt="Step 2 Icon"
+                class="feature-icon rounded-circle p-2 mb-3">
+              <h5 class="card-title fw-bold">2. Instant Match & Claim</h5>
+              <p class="card-text text-muted">Recipients browse nearby listings and claim food instantly.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card h-100 feature-card text-center p-4">
+            <div class="card-body">
+              <img src="https://placehold.co/60x60/4c7c34/white?text=3" alt="Step 3 Icon"
+                class="feature-icon rounded-circle p-2 mb-3">
+              <h5 class="card-title fw-bold">3. Coordinate Pickup</h5>
+              <p class="card-text text-muted">Securely connect to finalize the pickup and share the food.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
-    import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
-    import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-database.js";
+  <section class="bg-light py-5" id="mission">
+    <div class="container py-4">
+      <div class="row align-items-center">
+        <div class="col-lg-6 mb-4 mb-lg-0">
+          <h3 class="fw-bold display-6 mb-4" style="color: #4c7c34;">Our Commitment to Zero Waste</h3>
+          <p class="fs-5 text-secondary">
+            Millions of pounds of food go to waste daily while communities face scarcity. Eazy Food Share is a local
+            solution, utilizing technology to redirect perfectly good, unused food to where it's needed most, building
+            stronger, more resilient neighborhoods.
+          </p>
+          <a href="about.html" class="btn btn-outline-secondary rounded-pill mt-3 px-4">Learn More About Our Impact</a>
+        </div>
+        <div class="col-lg-6">
+          <img src="./Assets/images-jpeg-etc/6.jpg" class="img-fluid rounded-4 shadow-lg" alt="People sharing food">
+        </div>
+      </div>
+    </div>
+  </section>
 
+  <footer class="bg-dark text-white py-4">
+    <div class="container text-center">
+      <p class="mb-0">EazyFoodShare &copy; 2025 | Built with HTML, CSS, Bootstrap, JavaScript, & Firebase | <a href="#"
+          class="text-white text-decoration-none">Privacy Policy</a></p>
+    </div>
+  </footer>
 
-
-    const firebaseConfig = {
-      apiKey: "AIzaSyAGcO2LxrrjCCUaahQcEANaC6gqTDzoilc",
-      authDomain: "lvl-2-project.firebaseapp.com",
-      databaseURL: "https://lvl-2-project-default-rtdb.firebaseio.com",
-      projectId: "lvl-2-project",
-      storageBucket: "lvl-2-project.firebasestorage.app",
-      messagingSenderId: "114438653075",
-      appId: "1:114438653075:web:08eef3dffa7abc593b7966"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-    const database = getDatabase(app);
-
-
-    function donateMe() {
-      const donatorName = document.getElementById('donorName').value;
-      const donatorEmail = document.getElementById('donorMail').value;
-      const donatorPhoneNo = document.getElementById('donorPhoneNumber').value;
-      const donatorPassword = document.getElementById('donorPassword').value;
-      const donatorLocation = document.getElementById('donorAddress').value;
-
-      if (!donatorName || !donatorEmail || !donatorPassword || !donatorPhoneNo || !donatorLocation) {
-        alert('fill up')
-      } else {
-        createUserWithEmailAndPassword(auth, donatorEmail, donatorPassword)
-          .then((userCredential) => {
-            // Signed up 
-            const user = userCredential.user;
-            const donorId = {
-              id: user.uid,
-              name: donatorName,
-              email: donatorEmail,
-              phoneNumber: donatorPhoneNo,
-              location: donatorLocation
-            }
-
-            const transactRef = ref(database, "Signed Up User/1")
-            set(transactRef, donorId)
-
-            console.log(donorId)
-          })
-          .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            // ..
-            console.log(errorMessage)
-            console.log(errorCode)
-          });
-      }
-    }
-    window.donateMe = donateMe
-  </script>
-
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    xintegrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
 </body>
 
 </html>

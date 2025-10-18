@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>My Dashboard</h1>
+
+    <script type="module">
+        import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
+        import { ref, get, child } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-database.js";
+
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                // User is signed in. Now we can get their ID.
+                const userId = user.uid;
+                fetchUserData(userId); // Call the function to fetch data
+                console.log(userId)
+            } else {
+                // User is signed out, redirect them to the login page
+                window.location.href = "sign-up-hub.html";
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,53 @@
+body {
+  font-family: "Inter", sans-serif;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.6)),
+    url("../Assets/images-jpeg-etc/2.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+}
+
+.navbar {
+  border-bottom: 1px solid #dee2e6;
+}
+
+.text-primary-custom {
+  color: #4c7c34 !important;
+}
+
+.card-choice {
+  border: 2px solid #e9ecef;
+  background-color: #01091121;
+  border-radius: 15px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+}
+
+.card-choice:hover {
+  border-color: #4c7c34;
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+.card-choice h3 {
+  font-weight: bolder;
+}
+
+.icon-large {
+  font-size: 3rem;
+  color: #4c7c34;
+  margin-bottom: 0.5rem;
+}
+
+.btn-custom {
+  background-color: #4c7c34;
+  border-color: #4c7c34;
+  font-weight: 600;
+}
+
+.btn-custom:hover {
+  background-color: #386125;
+  border-color: #386125;
+}
