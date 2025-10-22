@@ -19,7 +19,7 @@
     <input type="text" placeholder="input your location here e.g (ogbomosho)" class="form-control mb-3"
       id="donorAddress">
 
-    <button class="btn btn-success" onclick="donateMe()" id="donate">Register as a Donator</button>
+    <button class="btn btn-success" onclick="createDonator()" id="donate">Register as a Donator</button>
 
   </div>
 
@@ -43,7 +43,7 @@
     const database = getDatabase(app);
 
 
-    function donateMe() {
+    function createDonator() {
       const donatorName = document.getElementById('donorName').value;
       const donatorEmail = document.getElementById('donorMail').value;
       const donatorPhoneNo = document.getElementById('donorPhoneNumber').value;
@@ -69,10 +69,9 @@
             const signUp = ref(database, `signedUpUsers/${user.uid}`)
 
             set(signUp, donorId)
-
               .then((newSignUp) => {
                 console.log('New donor added')
-                window.location.href="share-dashboard.html"
+                window.location.href = "share-dashboard.html"
               })
               .catch((error) => {
                 error.console('failed to save data')
@@ -90,7 +89,8 @@
           });
       }
     }
-    window.donateMe = donateMe
+    window.createDonator = createDonator
+
   </script>
 
 </body>
