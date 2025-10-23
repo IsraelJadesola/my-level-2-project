@@ -14,19 +14,35 @@
 </head>
 
 <body>
-    <!-- 1. Navigation Bar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
-        <div class="container py-2 px-4">
+    <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm sticky-top">
+        <div class="container-fluid py-2 px-4">
             <a class="navbar-brand fw-bold fs-4 text-dark" href="index.html">
-                <span class="text-primary-custom">Eazy Food</span>Share
+                Eazy<span style="color: #4c7c34;">Food</span>Share
             </a>
-            <div class="ms-auto">
-                <a class="btn btn-outline-dark rounded-pill px-4" href="sign-up-hub.html">Sign Up</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item me-lg-3">
+                        <a class="nav-link" href="index.html#how-it-works">How It Works</a>
+                    </li>
+                    <li class="nav-item me-lg-3">
+                        <a class="nav-link" href="index.html#mission">Our Mission</a>
+                    </li>
+                    <li class="nav-item me-lg-3">
+                        <a class="nav-link" href="about.html">About us</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="btn btn-outline-success rounded-pill px-4 " href="sign-up-hub.html">Get Started</a>
+                    </li>
+                </ul>
             </div>
         </div>
     </nav>
 
-    <!-- 2. Main Content / Sign In Form -->
     <main class="py-5 d-flex align-items-center">
         <div class="container">
             <div class="row justify-content-center">
@@ -54,8 +70,11 @@
                         <div id="messageBox" class="message-box text-center"></div>
 
                         <div class="text-center mt-3">
-                            <p class="mb-0 small">Not registered yet? <a href="donor_signup.html"
-                                    class="text-primary-custom text-decoration-none fw-bold">Sign Up Here</a></p>
+                            <p class="mb-0 small">Not registered yet?
+                                <a href="sign-up-hub.html" class="text-primary-custom text-decoration-none fw-bold">Sign
+                                    Up Here
+                                </a>
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -63,9 +82,11 @@
         </div>
     </main>
 
-    <footer class="bg-dark text-white py-4 mt-auto">
+    <footer class="bg-dark text-white py-4">
         <div class="container text-center">
-            <p class="mb-0">Eazy Food Share &copy; 2024</p>
+            <p class="mb-0">EazyFoodShare &copy; 2025 | Built with HTML, CSS, Bootstrap, JavaScript, & Firebase |
+                <a href="#" class="text-white text-decoration-none">Privacy Policy</a>
+            </p>
         </div>
     </footer>
 
@@ -74,7 +95,6 @@
         import { getAuth, signInWithEmailAndPassword, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
         import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-database.js";
 
-        // Set Firebase log level to debug for better console output during development
         // setLogLevel('Debug');
 
         // --- ENVIRONMENT SETUP (Using mandatory global variables) ---
@@ -97,7 +117,7 @@
         try {
             const app = initializeApp(firebaseConfig);
             auth = getAuth(app);
-            database = getDatabase(app); // Initialize Realtime Database
+            database = getDatabase(app);
 
             // Platform-specific sign in
             if (initialAuthToken) {
@@ -161,10 +181,6 @@
             }
         }
 
-
-        /**
-         * Handles the sign-in process for any user (Donor or Receiver).
-         */
         async function signInUser() {
             const email = document.getElementById('userMail').value.trim();
             const password = document.getElementById('userPassword').value.trim();
@@ -177,14 +193,12 @@
             showMessage("Signing in...", false);
 
             try {
-                // AUTHENTICATION
                 const userCredential = await signInWithEmailAndPassword(auth, email, password);
 
                 // Once authenticated, check role and redirect
                 await checkRoleAndRedirect(userCredential.user.uid);
 
             } catch (error) {
-                // ERROR HANDLING
                 let displayMessage = "Sign-in failed. Please check your email and password.";
 
                 if (error.code === 'auth/invalid-credential' || error.code === 'auth/wrong-password' || error.code === 'auth/user-not-found') {
@@ -201,9 +215,12 @@
         window.signInUser = signInUser;
 
     </script>
-    <script>
-        lucide.createIcons();
-    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        xintegrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+
+    <script>lucide.createIcons();</script>
 </body>
 
 </html>

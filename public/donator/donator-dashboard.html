@@ -326,13 +326,13 @@
             } else {
                 // User is signed out, redirect them
                 console.log("No user signed in. Redirecting...");
-                window.location.href = "sign-in.html";
+                window.location.href = "../sign-in.html";
             }
         });
 
         document.getElementById('signOutBtn').addEventListener('click', () => {
             signOut(auth).then(() => {
-                window.location.replace("sign-in.html");
+                window.location.replace("../sign-in.html");
             }).catch((error) => {
                 console.error("Sign Out Error:", error);
                 showMessageModal('Error', 'Failed to sign out. Please try again.');
