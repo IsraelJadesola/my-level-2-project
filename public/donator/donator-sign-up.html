@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Share Food</title>
+  <link rel="stylesheet" href="../styles/bootstrap.css">
+  <link rel="stylesheet" href="../styles/donator-sign-up.css">
+
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+</head>
+
+<style>
+
+</style>
+
+<body>
+  <!-- 1. Navigation Bar (Matching sign-in page) -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+    <div class="container py-2 px-4">
+      <a class="navbar-brand fw-bold fs-4 text-dark" href="index.html">
+        <span class="text-primary-custom">Eazy Food</span>Share
+      </a>
+      <div class="ms-auto">
+        <!-- Link to the Sign In page -->
+        <a class="btn btn-outline-dark rounded-pill px-4" href="../sign-in.html">Sign In</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- 2. Main Content / Registration Form -->
+  <main class="py-5 d-flex align-items-center">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-sm-10 col-md-8 col-lg-6">
+          <div class="card p-4 p-md-5">
+            <header class="text-center mb-4">
+              <!-- Icon is still custom green but stands out better -->
+              <i data-lucide="hand-heart" class="text-primary-custom" style="width: 3rem; height: 3rem;"></i>
+              <h1 class="h4 fw-bold mt-2 text-primary-custom">Become a Donor</h1>
+              <p class="text-muted">Join our community and share your excess food to make an impact.</p>
+
+              <!-- Small information box - using the success color for brand consistency -->
+              <div class="alert alert-success border-success mt-3 small p-2" role="alert"
+                style="color: #155724; background-color: #d4edda;">
+                Your generosity is protected by our **Good Samaritan Laws**.
+              </div>
+            </header>
+
+            <!-- Input Fields - Re-styled for Bootstrap 5 -->
+            <div class="mb-3">
+              <label for="donorName" class="form-label text-muted">Your Organization or Name</label>
+              <input type="text" placeholder="e.g., The Local Bakery or John Doe" class="form-control" id="donorName">
+            </div>
+
+            <div class="mb-3">
+              <label for="donorMail" class="form-label text-muted">Email Address</label>
+              <input type="email" placeholder="input your email here" class="form-control" id="donorMail">
+            </div>
+
+            <div class="mb-3">
+              <label for="donorPassword" class="form-label text-muted">Set Password</label>
+              <input type="password" placeholder="create a secure password" class="form-control" id="donorPassword">
+            </div>
+
+            <div class="mb-3">
+              <label for="donorPhoneNumber" class="form-label text-muted">Phone Number</label>
+              <input type="tel" placeholder="input your phone number here" class="form-control" id="donorPhoneNumber">
+            </div>
+
+            <!-- Identity Field (Disabled and styled to look like information) -->
+            <div class="mb-3">
+              <label for="userIdentity" class="form-label text-muted">User Role</label>
+              <input type="text" value="donator" disabled class="form-control bg-light text-primary-custom fw-bold"
+                id="userIdentity">
+            </div>
+
+            <div class="mb-4">
+              <label for="donorAddress" class="form-label text-muted">Location</label>
+              <input type="text" placeholder="input your city or detailed address" class="form-control"
+                id="donorAddress">
+            </div>
+
+            <!-- Registration Button -->
+            <button class="btn btn-custom text-white btn-lg" onclick="createDonator()" id="donate">
+              Register as a Donator
+            </button>
+
+            <div class="text-center mt-3">
+              <p class="mb-0 small text-dark">Already have an account? <a href="../sign-in.html"
+                  class="text-primary-custom text-decoration-none fw-bold">Sign In</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- 3. Footer (Matching sign-in page) -->
+  <footer class="bg-dark text-white py-4 mt-auto">
+    <div class="container text-center">
+      <p class="mb-0">Eazy Food Share &copy; 2024</p>
+    </div>
+  </footer>
+
+
+  <!-- Required for Lucide Icons to render -->
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
+    import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
+    import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-database.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyAGcO2LxrrjCCUaahQcEANaC6gqTDzoilc",
+      authDomain: "lvl-2-project.firebaseapp.com",
+      databaseURL: "https://lvl-2-project-default-rtdb.firebaseio.com",
+      projectId: "lvl-2-project",
+      storageBucket: "lvl-2-project.firebasestorage.app",
+      messagingSenderId: "114438653075",
+      appId: "1:114438653075:web:08eef3dffa7abc593b7966"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const database = getDatabase(app);
+
+
+    function createDonator() {
+      const donatorName = document.getElementById('donorName').value;
+      const donatorEmail = document.getElementById('donorMail').value;
+      const donatorPhoneNo = document.getElementById('donorPhoneNumber').value;
+      const donatorPassword = document.getElementById('donorPassword').value;
+      const userIdentity = document.getElementById('userIdentity').value
+      const donatorLocation = document.getElementById('donorAddress').value;
+
+
+      if (!donatorName || !donatorEmail || !donatorPassword || !donatorPhoneNo || !donatorLocation) {
+        alert('Please fill all fields correctly')
+      } else {
+        createUserWithEmailAndPassword(auth, donatorEmail, donatorPassword)
+          .then((userCredential) => {
+            const user = userCredential.user;
+
+            const donorId = {
+              id: user.uid,
+              name: donatorName,
+              email: donatorEmail,
+              phoneNumber: donatorPhoneNo,
+              location: donatorLocation,
+              password: donatorPassword,
+              userIdentity: userIdentity
+            }
+
+            const signUp = ref(database, `signedUpUsers/${user.uid}`)
+
+            set(signUp, donorId)
+              .then((newSignUp) => {
+                console.log('New donor added')
+                window.location.href = "donator-dashboard.html"
+              })
+              .catch((error) => {
+                error.console('failed to save data')
+              })
+
+            console.log(donorId)
+            console.log(user)
+          })
+          .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            // ..
+            console.log(errorMessage)
+            console.log(errorCode)
+          });
+      }
+    }
+    window.createDonator = createDonator
+
+  </script>
+  <script>lucide.createIcons();</script>
+
+</body>
+
+</html>

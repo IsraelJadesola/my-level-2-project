@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eazy Food Share | User Sign In</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        xintegrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="./styles/sign-in-hub.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+</head>
+
+<body>
+    <!-- 1. Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+        <div class="container py-2 px-4">
+            <a class="navbar-brand fw-bold fs-4 text-dark" href="index.html">
+                <span class="text-primary-custom">Eazy Food</span>Share
+            </a>
+            <div class="ms-auto">
+                <a class="btn btn-outline-dark rounded-pill px-4" href="sign-up-hub.html">Sign Up</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 2. Main Content / Sign In Form -->
+    <main class="py-5 d-flex align-items-center">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-sm-10 col-md-8 col-lg-5">
+                    <div class="card p-4 p-md-5">
+                        <header class="text-center mb-4">
+                            <i data-lucide="log-in" class="text-primary-custom" style="width: 3rem; height: 3rem;"></i>
+                            <h1 class="h4 fw-bold mt-2 text-primary-custom">User Sign In</h1>
+                            <p class="text-muted">Access your personal dashboard (Donor or Receiver).</p>
+                        </header>
+
+                        <div class="mb-3">
+                            <label for="userMail" class="form-label text-muted">Email Address</label>
+                            <input type="email" placeholder="input your email here" class="form-control" id="userMail"
+                                required>
+                        </div>
+                        <div class="mb-4">
+                            <label for="userPassword" class="form-label text-muted">Password</label>
+                            <input type="password" placeholder="input your password here" class="form-control"
+                                id="userPassword" required>
+                        </div>
+
+                        <button class="btn btn-custom text-white btn-lg" onclick="signInUser()" id="signInBtn">Sign
+                            In</button>
+                        <div id="messageBox" class="message-box text-center"></div>
+
+                        <div class="text-center mt-3">
+                            <p class="mb-0 small">Not registered yet? <a href="donor_signup.html"
+                                    class="text-primary-custom text-decoration-none fw-bold">Sign Up Here</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-dark text-white py-4 mt-auto">
+        <div class="container text-center">
+            <p class="mb-0">Eazy Food Share &copy; 2024</p>
+        </div>
+    </footer>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-database.js";
+
+        // Set Firebase log level to debug for better console output during development
+        // setLogLevel('Debug');
+
+        // --- ENVIRONMENT SETUP (Using mandatory global variables) ---
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+        const firebaseConfig = {
+            apiKey: "AIzaSyAGcO2LxrrjCCUaahQcEANaC6gqTDzoilc",
+            authDomain: "lvl-2-project.firebaseapp.com",
+            databaseURL: "https://lvl-2-project-default-rtdb.firebaseio.com",
+            projectId: "lvl-2-project",
+            storageBucket: "lvl-2-project.firebasestorage.app",
+            messagingSenderId: "114438653075",
+            appId: "1:114438653075:web:08eef3dffa7abc593b7966"
+        };
+        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+
+        let auth;
+        let database;
+        const messageBox = document.getElementById('messageBox');
+
+        try {
+            const app = initializeApp(firebaseConfig);
+            auth = getAuth(app);
+            database = getDatabase(app); // Initialize Realtime Database
+
+            // Platform-specific sign in
+            if (initialAuthToken) {
+                signInWithCustomToken(auth, initialAuthToken).catch(e => console.error("Custom token sign in failed:", e));
+            } else {
+                signInAnonymously(auth).catch(e => console.error("Anonymous sign in failed:", e));
+            }
+        } catch (e) {
+            console.error("Firebase initialization error:", e);
+        }
+
+        // Helper function for displaying messages (replaces non-compliant alert())
+        function showMessage(msg, isError) {
+            messageBox.textContent = msg;
+            messageBox.style.display = 'block';
+            messageBox.className = isError
+                ? 'message-box alert-danger text-center'
+                : 'message-box alert-success text-center bg-success text-white';
+        }
+
+        /**
+         * Fetches the user's role/identity from the Firebase Realtime Database and redirects them.
+         */
+        async function checkRoleAndRedirect(userId) {
+            // Path to user's private data, which is expected to hold the 'userIdentit' field
+            const profilePath = `signedUpUsers/${userId}`;
+            const userProfileRef = ref(database, profilePath);
+
+            console.log(`[RTDB] Checking profile at path: ${profilePath}`);
+
+            try {
+                const profileSnap = await get(userProfileRef);
+
+                if (profileSnap.exists()) {
+                    const userData = profileSnap.val();
+                    // *** FIX: Accessing 'userIdentit' field as specified by the user ***
+                    const identity = userData?.userIdentity;
+
+                    console.log(`[RTDB] Profile found. Identity: ${identity}`);
+
+                    if (identity === 'donator') { // Checking for 'donator' value as specified
+                        showMessage(`Welcome back, Donor! Redirecting to dashboard...`, false);
+                        setTimeout(() => { window.location.href = './donator/donator-dashboard.html'; }, 1000);
+                    } else if (identity === 'receiver') { // Keeping a check for receiver identity for completeness
+                        showMessage(`Welcome back, Receiver! Redirecting to dashboard...`, false);
+                        setTimeout(() => { window.location.href = 'receiver_dashboard.html'; }, 1000);
+                    } else {
+                        // If the identity field exists but has an unexpected value
+                        showMessage('Sign-in successful, but your user identity is missing or invalid. Contact support.', true);
+                        await auth.signOut(); // Force sign out for safety
+                    }
+                } else {
+                    // This error is displayed because the snapshot doesn't exist
+                    showMessage('Sign-in successful, but your user profile could not be found. Please complete registration.', true);
+                    console.error(`[RTDB] Profile not found at path: ${profilePath}`);
+                }
+
+            } catch (rtdbError) {
+                showMessage('Sign-in successful, but failed to retrieve user identity from the database. Please try again or contact support.', true);
+                console.error("Realtime Database Error:", rtdbError);
+            }
+        }
+
+
+        /**
+         * Handles the sign-in process for any user (Donor or Receiver).
+         */
+        async function signInUser() {
+            const email = document.getElementById('userMail').value.trim();
+            const password = document.getElementById('userPassword').value.trim();
+
+            if (!email || !password) {
+                showMessage("Please enter both email and password.", true);
+                return;
+            }
+
+            showMessage("Signing in...", false);
+
+            try {
+                // AUTHENTICATION
+                const userCredential = await signInWithEmailAndPassword(auth, email, password);
+
+                // Once authenticated, check role and redirect
+                await checkRoleAndRedirect(userCredential.user.uid);
+
+            } catch (error) {
+                // ERROR HANDLING
+                let displayMessage = "Sign-in failed. Please check your email and password.";
+
+                if (error.code === 'auth/invalid-credential' || error.code === 'auth/wrong-password' || error.code === 'auth/user-not-found') {
+                    displayMessage = 'Invalid email or password. Please try again.';
+                } else if (error.code) {
+                    displayMessage = `Error: ${error.code.replace('auth/', '').replace(/-/g, ' ')}.`;
+                }
+
+                showMessage(displayMessage, true);
+                console.error("Firebase Sign In Error:", error.code, error.message);
+            }
+        }
+
+        window.signInUser = signInUser;
+
+    </script>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,74 @@
+:root {
+  --primary-green: #3d7a1e; /* Rich Green */
+  --dark-gray: #333;
+  --light-bg: #f5f9f5;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  background-color: var(--light-bg);
+  min-height: 100vh;
+}
+
+/* Consistent Primary Color */
+.text-primary-custom {
+  color: var(--primary-green) !important;
+}
+
+/* Custom Green Button Style (For 'Post Food' and 'Sign Out') */
+.btn-custom-green {
+  background-color: var(--primary-green);
+  border-color: var(--primary-green);
+  color: #fff;
+  font-weight: 700;
+  border-radius: 10px; /* Consistent rounded corners */
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(61, 122, 30, 0.4);
+}
+
+.btn-custom-green:hover {
+  background-color: #2e5c16;
+  border-color: #2e5c16;
+  color: #fff;
+  box-shadow: 0 6px 15px rgba(61, 122, 30, 0.6);
+}
+
+/* Sign Out Button inherited style for consistency */
+.btn-signout-custom {
+  composes: btn-custom-green;
+  border-radius: 20px; /* Use rounded pill style for nav buttons */
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+/* Navbar Brand Styling for Logo Icon */
+.navbar-logo-icon {
+  margin-right: 8px;
+  color: var(--primary-green);
+  transform: translateY(-1px);
+}
+
+/* Styling for the Main Info Card and Feature Cards (Replacing custom classes) */
+.info-card,
+.feature-card {
+  border-radius: 1rem;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  border: none; /* Remove default card border */
+}
+
+.info-card {
+  border-left: 6px solid var(--primary-green); /* Green accent bar on the left */
+}
+
+/* Form Control Styling */
+.form-control,
+.form-select {
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--primary-green);
+  box-shadow: 0 0 0 0.25rem rgba(61, 122, 30, 0.4);
+}

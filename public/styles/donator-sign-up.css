@@ -1,0 +1,83 @@
+:root {
+  --primary-green: #3d7a1e;
+  /* A slightly richer, darker green */
+  --light-bg: #f5f9f5;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  background-color: var(--light-bg);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.text-primary-custom {
+  color: var(--primary-green) !important;
+}
+
+/* Bold button styling with enhanced shadow */
+.btn-custom {
+  background-color: var(--primary-green);
+  border-color: var(--primary-green);
+  font-weight: 700;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(61, 122, 30, 0.4);
+  /* Shadow to make it pop */
+}
+
+.btn-custom:hover {
+  background-color: #2e5c16;
+  /* Darker hover state */
+  border-color: #2e5c16;
+  box-shadow: 0 6px 15px rgba(61, 122, 30, 0.6);
+}
+
+.card {
+  border-radius: 16px;
+  /* Slightly more rounded */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  /* Stronger card shadow */
+  border: none;
+}
+
+/* Linear Gradient Background Template for Main Content */
+main {
+  flex-grow: 1;
+  /* Template for your custom background image */
+  background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+    /* Dark overlay for text contrast */
+      /* Placeholder to easily add your image URL here */
+      url("../Assets/images-jpeg-etc/17.jpg");
+
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  /* Optional: Makes the image scroll effect nice */
+  color: #fff;
+  /* Ensure main content text is readable on a dark background */
+}
+
+/* Custom form styling for a clean look */
+.form-control {
+  border-radius: 8px;
+}
+
+.form-control:focus {
+  border-color: var(--primary-green);
+  box-shadow: 0 0 0 0.25rem rgba(61, 122, 30, 0.4);
+}
+
+/* Override default card background/text for contrast against the new main background */
+main .card {
+  background-color: rgba(255, 255, 255, 0.95);
+  /* Slightly transparent white card */
+  color: #333;
+  /* Dark text for readability on the card */
+}
+
+/* Ensure form labels are visible on the card */
+main .card .form-label {
+  color: #555 !important;
+}
