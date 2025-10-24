@@ -5,25 +5,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Receiver Dashboard - Eazy Food Share</title>
+    <!-- Load Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="../styles/donator-dashboard.css">
-
+        xintegrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- Custom CSS (inlined for single file, styled to match the green theme) -->
+    <link rel="stylesheet" href="../styles/receiver.dashbord.css">
+    <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
-
 </head>
 
 <body class="bg-light-green min-vh-100 font-sans">
 
+    <!-- Message Modal Structure -->
+    <div class="modal fade" id="messageModal" tabindex="-1" aria-labelledby="messageModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content rounded-xl shadow-lg">
+                <div class="modal-header">
+                    <h5 class="modal-title fw-bold text-dark" id="messageModalLabel">Message</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="messageModalBody">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation Bar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
         <div class="container py-2 px-4">
             <a class="navbar-brand fw-bold fs-4 text-dark d-flex align-items-center" href="index.html">
-                <i data-lucide="leaf" class="navbar-logo-icon" style="width: 1.5rem; height: 1.5rem;"></i>
+                <i data-lucide="leaf" class="navbar-logo-icon me-2" style="width: 1.5rem; height: 1.5rem;"></i>
                 <span class="text-primary-custom">Eazy Food</span>Share
             </a>
 
             <div class="ms-auto d-flex align-items-center gap-2">
-                <button class="btn btn-signout-custom px-4" id="signOutBtn">
+                <button class="btn btn-signout-custom px-4 rounded-pill" id="signOutBtn">
                     <i data-lucide="log-out" style="width: 1.2rem; height: 1.2rem;"></i>
                     Sign Out
                 </button>
@@ -31,13 +51,15 @@
         </div>
     </nav>
 
+    <!-- Main Content -->
     <main class="container py-5">
         <div class="row">
             <div class="col-12">
 
+                <!-- User Information Card -->
                 <div class="bg-white info-card p-4 p-md-5 mb-5">
-
-                    <div id="displayName" class="fs-2 fw-bold text-primary-custom mb-2">Loading User...</div>
+                    <h1 class="fs-2 fw-bold text-primary-custom mb-2">Receiver Dashboard</h1>
+                    <div id="displayName" class="fs-4 fw-semibold text-dark mb-3">Loading User...</div>
 
                     <div class="text-secondary mt-1 small">
                         Email: <span id="displayEmail" class="fw-medium text-dark"></span> &bull;
@@ -46,62 +68,18 @@
                     </div>
                 </div>
 
+                <!-- Available Listings Section -->
                 <div class="row g-4 bigDiv">
-
-                    <div class="col-lg-6">
+                    <div class="col-12">
                         <div class="bg-white feature-card p-4 p-md-5 h-100">
-                            <h2 class="fs-3 fw-semibold mb-4 text-primary-custom">Post New Food Donation</h2>
+                            <h2 class="fs-3 fw-semibold mb-4 text-primary-custom">Available Food Donations</h2>
 
-                            <form>
-                                <div class="mb-3">
-                                    <label for="foodName" class="form-label small fw-medium text-secondary">Food Item
-                                        Name</label>
-                                    <input type="text" id="foodName" class="form-control"
-                                        placeholder="e.g., Loaves of Bread, Bags of Rice">
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="foodMeasurement"
-                                        class="form-label small fw-medium text-secondary">Measurement
-                                        Unit</label>
-                                    <select id="foodMeasurement" class="form-select">
-                                        <option value="" selected disabled>Select a measurement unit...</option>
-                                        <option value="Milk Tin (Agolo)">Milk Tin (Agolo)</option>
-                                        <option value="Tomato Tin (Derica)">Tomato Tin (Derica)</option>
-                                        <option value="Mudu (Congo)">Mudu (Congo)</option>
-                                        <option value="Paint Rubber (4 Congo)">Paint Rubber (4 Congo)</option>
-                                        <option value="Big Basket">Big Basket (for Tomatoes and Pepper, etc)</option>
-                                        <option value="Bunches">Bunches (for fruits like Banana, etc)</option>
-                                        <option value="Bag">Bag</option>
-                                        <option value="Kilogram">Kilogram</option>
-                                        <option value="others">Others (Specify in Food Name)</option>
-                                    </select>
-                                </div>
-
-                                <div class="mb-4">
-                                    <label for="foodQuantity"
-                                        class="form-label small fw-medium text-secondary">Quantity</label>
-                                    <input type="number" id="foodQuantity" class="form-control"
-                                        placeholder="Enter quantity in selected unit">
-                                </div>
-
-                                <button type="button" onclick="window.postFood()"
-                                    class="w-100 btn btn-lg btn-custom-green fw-bold py-3 rounded-lg">
-                                    <i data-lucide="plus-circle" class="me-2"
-                                        style="width: 1.2rem; height: 1.2rem;"></i>
-                                    Post Food for Sharing
-                                </button>
-                            </form>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-6">
-                        <div class="bg-white feature-card p-4 p-md-5 h-100">
-                            <h2 class="fs-3 fw-semibold mb-4 text-primary-custom">My Current Listings</h2>
-                            <div id="donorListings" class="d-grid gap-3">
-                                <p class="text-secondary" id="loadingListings" style="display:none;">Loading your posted
-                                    items...</p>
+                            <!-- Listings Container -->
+                            <div id="availableListings" class="d-grid gap-4">
+                                <!-- Listings will be injected here by JavaScript -->
+                                <p class="text-secondary" id="loadingListings">Loading available food items...</p>
                             </div>
+
                         </div>
                     </div>
                 </div>
@@ -110,16 +88,26 @@
         </div>
     </main>
 
+    <!-- Footer -->
+    <footer class="bg-white text-center text-muted py-3 mt-5 shadow-sm">
+        <div class="container">
+            <p class="mb-0 small">&copy; 2024 Eazy Food Share. All rights reserved.</p>
+        </div>
+    </footer>
+
+
     <script>lucide.createIcons();</script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        xintegrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
 
     <script type="module">
+        // Import Firebase functions from the same versions you used in the donor dashboard
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
         import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
-        import { getDatabase, ref, set, get, onValue } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-database.js";
+        import { getDatabase, ref, get, onValue } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-database.js";
 
+        // --- Firebase Configuration (Matching Donor Dashboard) ---
         const firebaseConfig = {
             apiKey: "AIzaSyAGcO2LxrrjCCUaahQcEANaC6gqTDzoilc",
             authDomain: "lvl-2-project.firebaseapp.com",
@@ -136,16 +124,26 @@
 
         // Global variable to hold the currently authenticated user's details
         let currentUser = null;
-        let currentUserName = '';
-        let currentUserEmail = '';
-        let currentUserPhoneNumber = '';
-        let currentUserLocation = '';
+
+        // Utility to show Bootstrap Modal (replacing alert/confirm)
+        const messageModal = new bootstrap.Modal(document.getElementById('messageModal'));
+
+        function showMessageModal(title, message) {
+            document.getElementById('messageModalLabel').textContent = title;
+            document.getElementById('messageModalBody').innerHTML = `<p>${message}</p>`;
+            messageModal.show();
+        }
 
         // ===========================================
         // 1. DATA FETCHING (User Profile and Listings)
         // ===========================================
 
+        /**
+         * Fetches and displays the current user's (Receiver's) profile details.
+         * @param {string} userId The Firebase user ID.
+         */
         function fetchUserProfileData(userId) {
+            // Note: Uses the same 'signedUpUsers' path as the Donor Dashboard
             const userRef = ref(database, `signedUpUsers/${userId}`);
 
             get(userRef)
@@ -153,102 +151,112 @@
                     if (snapshot.exists()) {
                         const userData = snapshot.val();
 
-                        // Store these for use in the postFood function
-                        currentUserName = userData.name;
-                        currentUserEmail = userData.email;
-                        currentUserPhoneNumber = userData.phoneNumber
-                        currentUserLocation = userData.location;
+                        document.getElementById('displayName').textContent = `Welcome, ${userData.name}!`;
+                        document.getElementById('displayEmail').textContent = userData.email || 'N/A';
+                        document.getElementById('displayPhoneNumber').textContent = userData.phoneNumber || 'N/A';
+                        document.getElementById('displayLocation').textContent = userData.location || 'N/A';
 
-                        const welcomeElement = document.getElementById('displayName');
-                        const emailElement = document.getElementById('displayEmail');
-                        const phoneNumberElement = document.getElementById('displayPhoneNumber');
-                        const locationElement = document.getElementById('displayLocation');
-
-                        if (welcomeElement) {
-                            welcomeElement.textContent = `Welcome, ${userData.name}!`;
-                        }
-                        if (emailElement) {
-                            emailElement.textContent = userData.email;
-                        }
-                        if (phoneNumberElement) {
-                            phoneNumberElement.textContent = userData.phoneNumber;
-                        }
-                        if (locationElement) {
-                            locationElement.textContent = userData.location;
-                        }
                     } else {
-                        console.log("No donor profile data found for this user.");
+                        console.log("No receiver profile data found for this user.");
+                        showMessageModal('Profile Error', 'Your profile details could not be loaded.');
                     }
                 })
                 .catch((error) => {
                     console.error("Error fetching user profile data:", error);
+                    showMessageModal('Connection Error', 'Failed to connect to the database to load profile.');
                 });
         }
 
-        // // Listener to display the donor's active listings in real-time
-        // function listenForDonorListings(userId) {
-        //     const listingsRef = ref(database, 'foodListings');
-        //     const listingsContainer = document.getElementById('donorListings');
+        /**
+         * Listens for all active food listings and displays them for the receiver.
+         */
+        function listenForAllListings() {
+            // CRITICAL: Fetches ALL listings from the same path the donor uses to post
+            const listingsRef = ref(database, 'foodListings');
+            const listingsContainer = document.getElementById('availableListings');
 
-        //     // Clear the loading message
-        //     listingsContainer.innerHTML = '';
+            // Clear the initial loading message
+            listingsContainer.innerHTML = '';
+            document.getElementById('loadingListings').style.display = 'none';
 
-        //     // onValue keeps the list updated in real-time
-        //     onValue(listingsRef, (snapshot) => {
-        //         listingsContainer.innerHTML = ''; // Clear previous listings
-        //         let foundListing = false;
+            // onValue keeps the list updated in real-time
+            onValue(listingsRef, (snapshot) => {
+                listingsContainer.innerHTML = ''; // Clear previous listings
+                let foundListing = false;
 
-        //         snapshot.forEach((childSnapshot) => {
-        //             const post = childSnapshot.val();
-        //             const postId = childSnapshot.key;
+                snapshot.forEach((childSnapshot) => {
+                    const post = childSnapshot.val();
 
-        //             // Only display items posted by the CURRENT user
-        //             if (post.donorId === userId) {
-        //                 foundListing = true;
+                    foundListing = true;
 
-        //                 // Create HTML element for the listing
-        //                 const itemDiv = document.createElement('div');
-        //                 itemDiv.className = 'bg-light p-3 rounded border-green-start d-flex justify-content-between align-items-center';
-        //                 itemDiv.innerHTML = `
-        //                     <div>
-        //                         <p class="fw-semibold text-dark mb-0">${post.foodName}</p>
-        //                         <p class="small text-secondary mb-0">${post.foodQuantity} ${post.foodMeasurement}</p>
-        //                     </div>
-        //                     <button data-id="${postId}" onclick="deleteListing(this.getAttribute('data-id'))" class="btn btn-sm text-danger fw-medium p-0">
-        //                         Delete
-        //                     </button>
-        //                 `;
-        //                 listingsContainer.appendChild(itemDiv);
-        //             }
-        //         });
+                    // Create HTML element for the listing
+                    const itemDiv = document.createElement('div');
+                    itemDiv.className = 'bg-light p-4 rounded border-left-lg shadow-sm';
+                    itemDiv.innerHTML = `
+                        <div class="d-flex align-items-center mb-2">
+                            <i data-lucide="utensils" class="text-primary-custom me-2" style="width: 1.5rem; height: 1.5rem;"></i>
+                            <h3 class="fs-5 fw-bold text-dark mb-0">${post.foodName}</h3>
+                        </div>
+                        <p class="mb-2 text-secondary fw-medium">
+                            <i data-lucide="scale" class="me-1" style="width: 1rem; height: 1rem;"></i>
+                            Quantity: ${post.foodQuantity} ${post.foodMeasurement}
+                        </p>
+                        
+                        <div class="border-top pt-3 mt-3">
+                            <p class="small text-muted mb-1 fw-medium">Contact Donor to Arrange Pickup:</p>
+                            <p class="small mb-1 text-dark">
+                                <i data-lucide="user" class="me-1" style="width: 1rem; height: 1rem;"></i>
+                                Donor: ${post.donorName}
+                            </p>
+                            <p class="small mb-1 text-dark">
+                                <i data-lucide="phone" class="me-1" style="width: 1rem; height: 1rem;"></i>
+                                Phone: <span class="fw-semibold">${post.donorPhone}</span>
+                            </p>
+                            <p class="small mb-0 text-dark">
+                                <i data-lucide="map-pin" class="me-1" style="width: 1rem; height: 1rem;"></i>
+                                Location: ${post.donorLocation}
+                            </p>
+                        </div>
+                    `;
+                    listingsContainer.appendChild(itemDiv);
+                });
 
-        //         if (!foundListing) {
-        //             listingsContainer.innerHTML = `
-        //                 <div class="alert alert-light text-center py-4 border-dashed" role="alert">
-        //                     <i data-lucide="list-plus" class="text-secondary mb-3"
-        //                         style="width: 2rem; height: 2rem;"></i>
-        //                     <p class="text-secondary mb-0 fw-medium">You have no active listings right now.</p>
-        //                     <p class="small text-muted mb-0">Post your first donation to see it here!</p>
-        //                 </div>
-        //             `;
-        //         }
-        //     });
-        // }
+                // Re-initialize Lucide icons for all new elements
+                lucide.createIcons();
+
+                if (!foundListing) {
+                    listingsContainer.innerHTML = `
+                        <div class="alert alert-light text-center py-5 border-dashed" role="alert">
+                            <i data-lucide="search-x" class="text-secondary mb-3"
+                                style="width: 2.5rem; height: 2.5rem;"></i>
+                            <p class="fs-5 text-secondary mb-1 fw-bold">No Available Food Donations Right Now.</p>
+                            <p class="small text-muted mb-0">Check back later! New food items can be posted anytime.</p>
+                        </div>
+                    `;
+                    lucide.createIcons();
+                }
+            });
+        }
+
+
+        // ===========================================
+        // 2. AUTHENTICATION LISTENER
+        // ===========================================
 
         onAuthStateChanged(auth, (user) => {
             if (user) {
                 currentUser = user;
                 const userId = user.uid;
-                console.log('user is logged in')
+                console.log('Receiver is logged in:', userId);
 
-                // 1. Fetch the user's name/email/location
+                // 1. Fetch the user's profile details
                 fetchUserProfileData(userId);
 
-                // 2. Start the real-time listener for their posts
-                // listenForDonorListings(userId);
+                // 2. Start the real-time listener for ALL donor posts
+                listenForAllListings();
 
             } else {
-                // User is signed out, redirect them
+                // User is signed out, redirect them (change path if necessary)
                 console.log("No user signed in. Redirecting...");
                 window.location.href = "../sign-in.html";
             }
@@ -262,9 +270,6 @@
                 showMessageModal('Error', 'Failed to sign out. Please try again.');
             });
         });
-
-        // window.postFood = postFood;
-        // window.deleteListing = deleteListing;
     </script>
 </body>
 
