@@ -7,7 +7,6 @@
   <title>Share Food</title>
   <link rel="stylesheet" href="../styles/bootstrap.css">
   <link rel="stylesheet" href="../styles/donator-sign-up.css">
-  <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 
 <body>
@@ -29,7 +28,7 @@
             <a class="nav-link" href="index.html#mission">Our Mission</a>
           </li>
           <li class="nav-item me-lg-3">
-            <a class="nav-link" href="about.html">About us</a>
+            <a class="nav-link" href="../about.html">About us</a>
           </li>
 
           <li class="nav-item">
@@ -111,7 +110,6 @@
   </footer>
 
 
-
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
     import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
@@ -175,7 +173,7 @@
           .catch((error) => {
             const errorCode = error.code;
             const errorMessage = error.message;
-            // ..
+
             console.log(errorMessage)
             console.log(errorCode)
           });
@@ -185,7 +183,6 @@
 
   </script>
 
-  <script>lucide.createIcons();</script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
     xintegrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
     crossorigin="anonymous"></script>

@@ -142,7 +142,7 @@
          * Fetches the user's role/identity from the Firebase Realtime Database and redirects them.
          */
         async function checkRoleAndRedirect(userId) {
-            // Path to user's private data, which is expected to hold the 'userIdentit' field
+            // Path to user's private data, which is expected to hold the 'userIdentity' field
             const profilePath = `signedUpUsers/${userId}`;
             const userProfileRef = ref(database, profilePath);
 
@@ -163,7 +163,9 @@
                         setTimeout(() => { window.location.href = './donator/donator-dashboard.html'; }, 1000);
                     } else if (identity === 'receiver') { // Keeping a check for receiver identity for completeness
                         showMessage(`Welcome back, Receiver! Redirecting to dashboard...`, false);
-                        setTimeout(() => { window.location.href = 'receiver_dashboard.html'; }, 1000);
+                        console.log('receiver is signed in');
+                        
+                        setTimeout(() => { window.location.href = './receiver/receiver-dashboard.html'; }, 1000);
                     } else {
                         // If the identity field exists but has an unexpected value
                         showMessage('Sign-in successful, but your user identity is missing or invalid. Contact support.', true);
