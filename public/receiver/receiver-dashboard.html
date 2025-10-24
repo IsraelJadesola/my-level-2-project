@@ -177,7 +177,7 @@
 
             // Clear the initial loading message
             listingsContainer.innerHTML = '';
-            document.getElementById('loadingListings').style.display = 'none';
+            // document.getElementById('loadingListings').style.display = 'none';
 
             // onValue keeps the list updated in real-time
             onValue(listingsRef, (snapshot) => {
@@ -199,7 +199,11 @@
                         </div>
                         <p class="mb-2 text-secondary fw-medium">
                             <i data-lucide="scale" class="me-1" style="width: 1rem; height: 1rem;"></i>
-                            Quantity: ${post.foodQuantity} ${post.foodMeasurement}
+                            Measurement: ${post.foodMeasurement}
+                        </p>
+                        <p class="mb-2 text-secondary fw-medium">
+                            <i data-lucide="scale" class="me-1" style="width: 1rem; height: 1rem;"></i>
+                            Quantity: ${post.foodQuantity}
                         </p>
                         
                         <div class="border-top pt-3 mt-3">
