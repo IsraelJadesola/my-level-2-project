@@ -7,13 +7,16 @@
     <title>Receive Food</title>
     <link rel="stylesheet" href="../styles/bootstrap.css">
     <link rel="stylesheet" href="../styles/receiver-sign-up.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 
 <body>
     <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm sticky-top">
         <div class="container-fluid py-2 px-4">
-            <a class="navbar-brand fw-bold fs-4 text-dark" href="index.html">
-                Eazy<span style="color: #4c7c34;">Food</span>Share
+            <a class="navbar-brand fw-bold fs-4 text-dark" href="../index.html">
+                <i data-lucide="leaf" class="navbar-logo-icon me-2"
+                    style="width: 1.5rem; height: 1.5rem; color: #4c7c34;"></i>Eazy<span
+                    style="color: #4c7c34;">Food</span>Share
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -114,8 +117,6 @@
         </div>
     </footer>
 
-
-
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
         import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
@@ -188,6 +189,8 @@
         window.createReceiver = createReceiver
 
     </script>
+
+    <script>lucide.createIcons();</script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         xintegrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"

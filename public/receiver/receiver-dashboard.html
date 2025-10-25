@@ -39,7 +39,7 @@
         <div class="container py-2 px-4">
             <a class="navbar-brand fw-bold fs-4 text-dark d-flex align-items-center" href="index.html">
                 <i data-lucide="leaf" class="navbar-logo-icon me-2" style="width: 1.5rem; height: 1.5rem;"></i>
-                <span class="text-primary-custom">Eazy Food</span>Share
+                Eazy<span class="text-primary-custom">Food</span>Share
             </a>
 
             <div class="ms-auto d-flex align-items-center gap-2">
@@ -175,13 +175,11 @@
             const listingsRef = ref(database, 'foodListings');
             const listingsContainer = document.getElementById('availableListings');
 
-            // Clear the initial loading message
             listingsContainer.innerHTML = '';
-            // document.getElementById('loadingListings').style.display = 'none';
 
             // onValue keeps the list updated in real-time
             onValue(listingsRef, (snapshot) => {
-                listingsContainer.innerHTML = ''; // Clear previous listings
+                listingsContainer.innerHTML = ''; 
                 let foundListing = false;
 
                 snapshot.forEach((childSnapshot) => {
@@ -189,7 +187,6 @@
 
                     foundListing = true;
 
-                    // Create HTML element for the listing
                     const itemDiv = document.createElement('div');
                     itemDiv.className = 'bg-light p-4 rounded border-left-lg shadow-sm';
                     itemDiv.innerHTML = `
