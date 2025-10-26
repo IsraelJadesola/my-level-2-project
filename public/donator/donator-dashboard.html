@@ -113,7 +113,8 @@
 
                     <div class="col-lg-6">
                         <div class="bg-white feature-card p-4 p-md-5 h-100">
-                            <h2 class="fs-3 fw-semibold mb-4 text-primary-custom">My Current Listings</h2>
+                            <h2 class="fs-3 fw-semibold text-primary-custom">My Current Listings</h2>
+                            <h5 class="mb-4 text-black" style="font-size: 0.77em; font-weight: 700;">Receivers will see this in their dashboard to contact you.</h5>
                             <div id="donorListings" class="d-grid gap-3">
                                 <p class="text-secondary" id="loadingListings" style="display:none;">Loading your posted
                                     items...</p>
@@ -252,7 +253,7 @@
 
         function postFood() {
             if (!currentUser || !currentUserName) {
-                // console.error("User details are missing. Please wait for authentication.");
+                alert('❌No details are found')
                 return;
             }
 
