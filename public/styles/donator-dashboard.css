@@ -15,10 +15,6 @@ body {
   background-attachment: fixed;
 }
 
-.bigDivMain {
-  
-}
-
 .text-primary-custom {
   color: var(--primary-green) !important;
 }
