@@ -1,22 +1,23 @@
 :root {
   --primary-custom: #10b981;
-  /* Emerald Green */
   --light-green: #f0fdf4;
-  /* Light Green Background */
   --signout-red: #ef4444;
-  /* Red for signout */
 }
 
 .bg-light-green {
-  background-color: var(--light-green);
+  background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.7)),
+    url("../Assets/images-jpeg-etc/18.jpg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
 }
 
 .text-primary-custom {
-  color: var(--primary-custom) !important;
+  color: #4c7c34 !important;
 }
 
 .border-left-lg {
-  border-left: 8px solid var(--primary-custom);
+  border-left: 8px solid #4c7c34;
 }
 
 .btn-signout-custom {
@@ -30,11 +31,13 @@
   color: white;
 }
 
-/* Card and Info Styling */
 .info-card,
 .feature-card {
   border-radius: 12px;
-  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+}
+.displayDiv {
+  background-color: rgba(255, 255, 255, 0.808);
 }
 
 .border-dashed {
