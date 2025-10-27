@@ -202,7 +202,7 @@
                     }
                 })
                 .catch((error) => {
-                    console.error("Error fetching user profile data:", error);
+                    alert("Error fetching user profile data:", error);
                 });
         }
 
@@ -262,7 +262,7 @@
             const donorFoodQuantity = document.getElementById("foodQuantity").value;
 
             if (!donorFoodName || !donorFoodQuantity || !donorFoodMeasurement) {
-                alert("Please fill all fields.");
+                alert("❌ Please fill all fields.");
                 return;
             }
             const postTimestamp = new Date().toISOString();
@@ -287,7 +287,7 @@
                     document.getElementById("foodQuantity").value = '';
                 })
                 .catch(error => {
-                    console.error("Error posting food:", error);
+                    alert("Error posting food:", error);
                 });
         }
 
@@ -299,10 +299,10 @@
             const postRef = ref(database, `foodListings/${postId}`);
             remove(postRef)
                 .then(() => {
-                    console.log(`Post ${postId} deleted successfully.`);
+                    alert(`Post deleted successfully. ✅`);
                 })
                 .catch((error) => {
-                    console.error("Error deleting post:", error);
+                    alert("Error deleting post:", error);
                 });
         }
 
@@ -310,7 +310,6 @@
             if (user) {
                 currentUser = user;
                 const userId = user.uid;
-                console.log('user is logged in')
 
                 fetchUserProfileData(userId);
                 listenForDonorListings(userId);
@@ -324,7 +323,7 @@
             signOut(auth).then(() => {
                 window.location.replace("../sign-in.html");
             }).catch((error) => {
-                console.error("Sign Out Error:", error);
+                alert("Sign Out Error:", error);
                 showMessageModal('Error', 'Failed to sign out. Please try again.');
             });
         });

@@ -102,7 +102,8 @@
                         <div class="text-center mt-3">
                             <p class="mb-0 small text-dark">Already have an account? <a href="../sign-in.html"
                                     class="text-primary-custom text-decoration-none fw-bold">Sign In</a></p>
-                            <p class="mb-0 mt-2 small text-dark">Want to sign up as a Donor? <a href="../donator/donator-sign-up.html"
+                            <p class="mb-0 mt-2 small text-dark">Want to sign up as a Donor? <a
+                                    href="../donator/donator-sign-up.html"
                                     class="text-primary-custom text-decoration-none fw-bold">Donor Sign up</a></p>
                         </div>
                     </div>
@@ -169,15 +170,11 @@
 
                         set(signUp, receiverId)
                             .then((newSignUp) => {
-                                console.log('New receiver added')
-                                window.location.href = "receiver-dashboard.html"
+                                window.location.href = "../sign-in.html"
                             })
                             .catch((error) => {
-                                error.console('failed to save data')
+                                error.alert('❌failed to save data')
                             })
-
-                        console.log(receiverId)
-                        console.log(user)
                     })
                     .catch((error) => {
                         const errorCode = error.code;
@@ -185,6 +182,7 @@
 
                         console.log(errorMessage)
                         console.log(errorCode)
+                        alert(`❌${errorCode}`)
                     });
             }
         }
